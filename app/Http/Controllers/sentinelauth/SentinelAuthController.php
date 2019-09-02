@@ -23,6 +23,37 @@ class SentinelAuthController extends Controller
             'username' => 'required|email',
             'key' => 'required',
         ]);
+
+        $credentials = [
+            'email'    => $request->username,
+            'password' => $request->key,
+        ];
+
+        if(Sentinel::authenticate($credentials) == true)
+        {
+            if($user = Sentinel::check())
+            {
+                $notification = ['toastr'=>"login successfully",'type'=>'success'];
+                return redirect()->route('backend_dashboard')->with($notification);
+            }
+            else
+            {
+                $notification = ['message'=>"please enter valid credentials",'type'=>'danger'];
+                return redirect()->route('sentinel_loginpage')->with($notification);
+            }
+        }
+        else
+        {
+            $notification = ['message'=>"please enter valid credentials",'type'=>'danger'];
+            return redirect()->route('sentinel_loginpage')->with($notification);
+        }
+    }
+
+    public function logoutprocess()
+    {
+        $current_user = Sentinel::getUser();
+        Sentinel::logout($current_user, true);
+        return redirect()->route('sentinel_loginpage');
     }
 
     public function registrationpage()
