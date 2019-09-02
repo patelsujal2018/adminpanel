@@ -63,6 +63,7 @@ class Kernel extends HttpKernel
 
         'iamadministrator' => \App\Http\Middleware\isadministrator::class,
         'prevent-back-history' => \App\Http\Middleware\PreventBackHistory::class,
+        'cors' => \App\Http\Middleware\Cors::class,
     ];
 
     /**
