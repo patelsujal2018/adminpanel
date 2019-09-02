@@ -20,6 +20,8 @@ Route::get('/','sentinelauth\SentinelAuthController@loginpage')->name('sentinel_
 
 Route::post('backend/login','sentinelauth\SentinelAuthController@loginprocess')->name('sentinel_loginprocess');
 
+Route::get('backend/logout','sentinelauth\SentinelAuthController@logoutprocess')->name('sentinel_logoutprocess');
+
 Route::get('backend/registration','sentinelauth\SentinelAuthController@registrationpage')->name('sentinel_registrationpage');
 
 Route::post('backend/registrationprocess','sentinelauth\SentinelAuthController@registrationprocess')->name('sentinel_registrationprocess');
