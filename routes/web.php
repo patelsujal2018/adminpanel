@@ -33,3 +33,11 @@ Route::post('backend/checkemail','sentinelauth\SentinelAuthController@checkemail
 Route::get('backend/resetpasswordpage/{user_email}/{activation_code}','sentinelauth\SentinelAuthController@resetpasswordpage')->name('sentinel_resetpasswordpage');
 
 Route::post('backend/resetpasswordprocess','sentinelauth\SentinelAuthController@resetpasswordprocess')->name('sentinel_resetpasswordprocess');
+
+Route::group(['middleware' => ['iamadministrator','prevent-back-history'],'prefix' => 'backend'], function () {
+
+	Route::get('dashboard',function(){
+		return view('backend.dashboard');
+	})->name('backend_dashboard');
+
+});
